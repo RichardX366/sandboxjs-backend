@@ -28,11 +28,11 @@ io.on('connection', async (socket) => {
 
   socket.on('code', ({ id, code }) => {
     try {
-      users[id].code = code;
-      sendUsers();
       if (id !== socket.id && code !== users[id].code) {
         socket.to(id).emit('code', code);
       }
+      users[id].code = code;
+      sendUsers();
     } catch {}
   });
 
